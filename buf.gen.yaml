@@ -20,3 +20,5 @@ plugins:
     opt:
       - paths=import
       - module=github.com/RyanDerr/GoKeyValueStore
+  - name: openapiv2
+    out: proto-public/openapiv2
