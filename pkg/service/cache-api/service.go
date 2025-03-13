@@ -1,12 +1,12 @@
 package service
 
 import (
-	pb "github.com/bgajjala8/go-cache/proto-public/go"
+	pb "github.com/RyanDerr/GoKeyValueStore/proto-public/go"
 )
 
 // Service implements the gRPC service "CacheService".
 type Service struct {
-	pb.UnimplementedCacheServiceServer
+	pb.UnimplementedKeyValueServiceServer
 	cache map[string]string
 }
 
@@ -19,5 +19,5 @@ func NewService() *Service {
 
 // Ensure that Service implements the CacheServiceServer interface.
 var (
-	_ pb.CacheServiceServer = (*Service)(nil)
+	_ pb.KeyValueServiceServer = (*Service)(nil)
 )

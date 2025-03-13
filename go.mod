@@ -1,4 +1,4 @@
-module github.com/bgajjala8/go-cache
+module github.com/RyanDerr/GoKeyValueStore
 
 go 1.23.2
 

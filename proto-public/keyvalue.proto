@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package bgajjala8.go_cache;
+package RyanDerr.KeyValueStore;
 
 import "google/api/annotations.proto";
 
-option go_package = "github.com/bgajjala8/go-cache";
+option go_package = "github.com/RyanDerr/GoKeyValueStore";
 
-service CacheService {
+service KeyValueService {
     rpc Set(SetRequest) returns (SetResponse) {
         option (google.api.http) = {
             post: "/v1/cache/set"

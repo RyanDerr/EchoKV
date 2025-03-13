@@ -4,19 +4,19 @@ plugins:
     out: proto-public/go
     opt:
       - paths=import
-      - module=github.com/bgajjala8/go-cache
+      - module=github.com/RyanDerr/GoKeyValueStore
   - name: go-grpc
     out: proto-public/go
     opt:
       - paths=import
-      - module=github.com/bgajjala8/go-cache
+      - module=github.com/RyanDerr/GoKeyValueStore
   - name: grpc-gateway
     out: proto-public/go
     opt:
       - paths=import
-      - module=github.com/bgajjala8/go-cache
+      - module=github.com/RyanDerr/GoKeyValueStore
   - name: go-json
     out: proto-public/go
     opt:
       - paths=import
-      - module=github.com/bgajjala8/go-cache
+      - module=github.com/RyanDerr/GoKeyValueStore
