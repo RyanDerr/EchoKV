@@ -4,7 +4,6 @@ import (
 	"context"
 	"log"
 	"net"
-	"net/http"
 
 	service "github.com/bgajjala8/go-cache/pkg/service/cache-api"
 	pb "github.com/bgajjala8/go-cache/proto-public/go"
@@ -46,7 +45,9 @@ func main() {
 
 	// Start the HTTP server
 	log.Printf("Starting HTTP server on %s\n", httpAddr)
-	if err := http.ListenAndServe(httpAddr, mux); err != nil {
+
+	server := configHttpServer(httpAddr, mux)
+	if err := server.ListenAndServe(); err != nil {
 		log.Fatalf("Failed to serve HTTP: %v", err)
 	}
 }

@@ -3,7 +3,7 @@ description: Handles Running All Go Test Files
 inputs:
   go-version:
     description: 'The Go version to use'
-    required: true
+    required: false
     default: '>=1.23.0'
 runs: 
   using: 'composite'
