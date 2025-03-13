@@ -4,9 +4,11 @@ import (
 	"context"
 	"log"
 	"net"
+	"net/http"
+	"time"
 
-	service "github.com/bgajjala8/go-cache/pkg/service/cache-api"
-	pb "github.com/bgajjala8/go-cache/proto-public/go"
+	service "github.com/RyanDerr/GoKeyValueStore/pkg/service/cache-api"
+	pb "github.com/RyanDerr/GoKeyValueStore/proto-public/go"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -28,7 +30,7 @@ func main() {
 
 		s := grpc.NewServer()
 		svc := service.NewService()
-		pb.RegisterCacheServiceServer(s, svc)
+		pb.RegisterKeyValueServiceServer(s, svc)
 
 		if err := s.Serve(lis); err != nil {
 			log.Fatalf("Failed to serve: %v\n", err)
@@ -38,7 +40,7 @@ func main() {
 	// Create a new gRPC Gateway mux for the HTTP server on main goroutine
 	mux := runtime.NewServeMux()
 	opts := []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())}
-	err := pb.RegisterCacheServiceHandlerFromEndpoint(context.Background(), mux, grpcAddr, opts)
+	err := pb.RegisterKeyValueServiceHandlerFromEndpoint(context.Background(), mux, grpcAddr, opts)
 	if err != nil {
 		log.Fatalf("Failed to start HTTP gateway: %v", err)
 	}
@@ -49,5 +51,14 @@ func main() {
 	server := configHttpServer(httpAddr, mux)
 	if err := server.ListenAndServe(); err != nil {
 		log.Fatalf("Failed to serve HTTP: %v", err)
+	}
+}
+
+func configHttpServer(addr string, mux *runtime.ServeMux) *http.Server {
+	return &http.Server{
+		Addr:         addr,
+		Handler:      mux,
+		ReadTimeout:  10 * time.Second,
+		WriteTimeout: 10 * time.Second,
 	}
 }

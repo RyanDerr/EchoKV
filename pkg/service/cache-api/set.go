@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	setcmd "github.com/bgajjala8/go-cache/pkg/set"
-	pb "github.com/bgajjala8/go-cache/proto-public/go"
+	setcmd "github.com/RyanDerr/GoKeyValueStore/pkg/set"
+	pb "github.com/RyanDerr/GoKeyValueStore/proto-public/go"
 	validation "github.com/go-ozzo/ozzo-validation"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

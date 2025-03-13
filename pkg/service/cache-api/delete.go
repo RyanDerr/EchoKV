@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	deletecmd "github.com/bgajjala8/go-cache/pkg/delete"
-	pb "github.com/bgajjala8/go-cache/proto-public/go"
+	deletecmd "github.com/RyanDerr/GoKeyValueStore/pkg/delete"
+	pb "github.com/RyanDerr/GoKeyValueStore/proto-public/go"
 	validate "github.com/go-ozzo/ozzo-validation"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

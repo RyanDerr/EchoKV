@@ -1,4 +1,4 @@
-# kvstore
+# Key Value Store
 
 Basic KV store in GO
 
