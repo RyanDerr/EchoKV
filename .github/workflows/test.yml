@@ -9,7 +9,7 @@ on:
       - main
 jobs:
   test:
-    name: Test
+    name: Test, Lint, and Security Scan
     runs-on: ubuntu-latest
     steps: 
       - name: Checkout repository
@@ -22,3 +22,8 @@ jobs:
       
       - name: Go Lint
         uses: golangci/golangci-lint-action@v6.1.1 
+      
+      - name: Go Security Scans
+        uses: securego/gosec@v2.22.2
+        with: 
+          args: ./...
