@@ -1,7 +1,7 @@
 package service
 
 import (
-	pb "github.com/RyanDerr/GoKeyValueStore/proto-public/go"
+	pb "github.com/RyanDerr/EchoKV/proto-public/go"
 )
 
 // Service implements the gRPC service "CacheService".

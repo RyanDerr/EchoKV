@@ -4,7 +4,7 @@
 // - protoc             (unknown)
 // source: proto-public/keyvalue.proto
 
-package GoKeyValueStore
+package EchoKV
 
 import (
 	context "context"

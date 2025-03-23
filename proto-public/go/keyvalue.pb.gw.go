@@ -2,11 +2,11 @@
 // source: proto-public/keyvalue.proto
 
 /*
-Package GoKeyValueStore is a reverse proxy.
+Package EchoKV is a reverse proxy.
 
 It translates gRPC into RESTful JSON APIs.
 */
-package GoKeyValueStore
+package EchoKV
 
 import (
 	"context"
