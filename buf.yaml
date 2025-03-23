@@ -1,6 +1,6 @@
 # For details on buf.yaml configuration, visit https://buf.build/docs/configuration/v2/buf-yaml
 version: v2
-name: buf.build/RyanDerr/GoKeyValueStore
+name: buf.build/RyanDerr/EchoKV
 lint:
   use:
     - STANDARD

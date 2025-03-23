@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"time"
 
-	service "github.com/RyanDerr/GoKeyValueStore/pkg/service/kv-api"
-	pb "github.com/RyanDerr/GoKeyValueStore/proto-public/go"
+	service "github.com/RyanDerr/EchoKV/pkg/service/kv-api"
+	pb "github.com/RyanDerr/EchoKV/proto-public/go"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
