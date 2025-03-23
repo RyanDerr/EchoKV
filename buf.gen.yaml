@@ -4,21 +4,21 @@ plugins:
     out: proto-public/go
     opt:
       - paths=import
-      - module=github.com/RyanDerr/GoKeyValueStore
+      - module=github.com/RyanDerr/EchoKV
   - name: go-grpc
     out: proto-public/go
     opt:
       - paths=import
-      - module=github.com/RyanDerr/GoKeyValueStore
+      - module=github.com/RyanDerr/EchoKV
   - name: grpc-gateway
     out: proto-public/go
     opt:
       - paths=import
-      - module=github.com/RyanDerr/GoKeyValueStore
+      - module=github.com/RyanDerr/EchoKV
   - name: go-json
     out: proto-public/go
     opt:
       - paths=import
-      - module=github.com/RyanDerr/GoKeyValueStore
+      - module=github.com/RyanDerr/EchoKV
   - name: openapiv2
     out: proto-public/openapiv2

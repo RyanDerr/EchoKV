@@ -4,7 +4,7 @@ package RyanDerr.KeyValueStore;
 
 import "google/api/annotations.proto";
 
-option go_package = "github.com/RyanDerr/GoKeyValueStore";
+option go_package = "github.com/RyanDerr/EchoKV";
 
 service KeyValueService {
     rpc Set(SetRequest) returns (SetResponse) {
