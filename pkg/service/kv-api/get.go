@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	getcmd "github.com/RyanDerr/GoKeyValueStore/pkg/get"
-	pb "github.com/RyanDerr/GoKeyValueStore/proto-public/go"
+	getcmd "github.com/RyanDerr/EchoKV/pkg/get"
+	pb "github.com/RyanDerr/EchoKV/proto-public/go"
 	validation "github.com/go-ozzo/ozzo-validation"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

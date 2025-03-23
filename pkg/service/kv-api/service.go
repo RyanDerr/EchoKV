@@ -1,12 +1,12 @@
 package service
 
 import (
-	pb "github.com/RyanDerr/GoKeyValueStore/proto-public/go"
+	pb "github.com/RyanDerr/EchoKV/proto-public/go"
 )
 
-// Service implements the gRPC service "CacheService".
+// Service implements the gRPC service "EchoKV".
 type Service struct {
-	pb.UnimplementedKeyValueServiceServer
+	pb.UnimplementedEchoKVServer
 	cache map[string]string
 }
 
@@ -17,7 +17,7 @@ func NewService() *Service {
 	}
 }
 
-// Ensure that Service implements the CacheServiceServer interface.
+// Ensure that Service implements the EchoKV interface.
 var (
-	_ pb.KeyValueServiceServer = (*Service)(nil)
+	_ pb.EchoKVServer = (*Service)(nil)
 )

@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "proto-public/keyvalue.proto",
+    "title": "proto-public/echokv.proto",
     "version": "version not set"
   },
   "tags": [
@@ -23,7 +23,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/KeyValueStoreDeleteResponse"
+              "$ref": "#/definitions/EchoKVDeleteResponse"
             }
           },
           "default": {
@@ -53,7 +53,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/KeyValueStoreGetResponse"
+              "$ref": "#/definitions/EchoKVGetResponse"
             }
           },
           "default": {
@@ -83,7 +83,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/KeyValueStoreSetResponse"
+              "$ref": "#/definitions/EchoKVSetResponse"
             }
           },
           "default": {
@@ -99,7 +99,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/KeyValueStoreSetRequest"
+              "$ref": "#/definitions/EchoKVSetRequest"
             }
           }
         ],
@@ -110,10 +110,10 @@
     }
   },
   "definitions": {
-    "KeyValueStoreDeleteResponse": {
+    "EchoKVDeleteResponse": {
       "type": "object"
     },
-    "KeyValueStoreGetResponse": {
+    "EchoKVGetResponse": {
       "type": "object",
       "properties": {
         "key": {
@@ -124,7 +124,7 @@
         }
       }
     },
-    "KeyValueStoreSetRequest": {
+    "EchoKVSetRequest": {
       "type": "object",
       "properties": {
         "key": {
@@ -135,7 +135,7 @@
         }
       }
     },
-    "KeyValueStoreSetResponse": {
+    "EchoKVSetResponse": {
       "type": "object",
       "properties": {
         "key": {

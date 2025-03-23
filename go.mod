@@ -1,4 +1,4 @@
-module github.com/RyanDerr/GoKeyValueStore
+module github.com/RyanDerr/EchoKV
 
 go 1.23.2
 
