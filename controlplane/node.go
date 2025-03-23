@@ -8,39 +8,25 @@ import (
 
 type Node struct {
 	Name      string
-	UniqueID  uuid.UUID
+	ID        uuid.UUID
 	ClusterID uuid.UUID
 }
 
-// NodeOptions is a set of optional parameters for creating a new node
-type NodeOptions struct {
-	Name string
-}
-
-func NewNode(clusterID uuid.UUID, options ...NodeOptions) *Node {
+func NewNode(clusterID uuid.UUID) *Node {
 	id := uuid.New()
 	logger.Info("Creating a new node", "clusterID", clusterID)
 	logger.Debug("Generated Node ID", "id", id)
 
-	var opts NodeOptions
-	if len(options) > 0 {
-		opts = options[0]
-	}
-
-	name := opts.Name
-	if name == "" {
-		logger.Info("No node name provided, generating a new one")
-		name = generateRandomNodeName(id)
-		logger.Info("Generated name", "name", name)
-	}
+	name := generateRandomNodeName(id)
+	logger.Debug("Generated name", "name", name)
 
 	return &Node{
 		Name:      name,
-		UniqueID:  id,
+		ID:        id,
 		ClusterID: clusterID,
 	}
 }
 
-func generateRandomNodeName(uniqueID uuid.UUID) string {
-	return fmt.Sprintf("node-%s", uniqueID.String())
+func generateRandomNodeName(ID uuid.UUID) string {
+	return fmt.Sprintf("node-%s", ID.String())
 }

@@ -16,7 +16,7 @@ var (
 type Cluster struct {
 	Name string
 	ID   uuid.UUID
-	Pool map[string]*Node
+	Pool map[uuid.UUID]*Node
 }
 
 type ClusterOptions struct {
@@ -33,8 +33,8 @@ func NewCluster(options ...ClusterOptions) (*Cluster, error) {
 	id := uuid.New()
 
 	logger.Info("Creating a new cluster", "clusterID", id)
-	cluster := &Cluster{
-		Pool: make(map[string]*Node),
+	c := &Cluster{
+		Pool: make(map[uuid.UUID]*Node),
 		ID:   id,
 	}
 
@@ -51,21 +51,40 @@ func NewCluster(options ...ClusterOptions) (*Cluster, error) {
 
 	name := opts.Name
 	if name == "" {
-		logger.Info("No cluster name provided, generating a new one")
+		logger.Debug("No cluster name provided, generating a new one")
 		name = generateRandomClusterName(id)
 	}
 
-	cluster.Name = name
+	c.Name = name
 
 	for range clusterSize {
 		//Create node and add node
-		if err := cluster.AddNode(); err != nil {
+		if err := c.AddNode(); err != nil {
 			logger.Error("Failed to add node", "error", err)
 			return nil, err
 		}
 	}
 
-	return cluster, nil
+	return c, nil
+}
+
+// AddNode adds a new node to the cluster
+func (c *Cluster) AddNode() error {
+	node := NewNode(c.ID)
+
+	// This should never happen in practice, but it's good to check
+	if _, exists := c.Pool[node.ID]; exists {
+		logger.Warn("Node already exists", "name", node.Name)
+		return fmt.Errorf("node with name %s already exists", node.Name)
+	}
+
+	c.Pool[node.ID] = node
+	logger.Info("Node added successfully", "name", node.Name)
+	return nil
+}
+
+func generateRandomClusterName(ID uuid.UUID) string {
+	return fmt.Sprintf("cluster-%s", ID.String())
 }
 
 // GetClusterSize returns the size of the cluster
@@ -73,25 +92,12 @@ func (c *Cluster) GetClusterSize() int {
 	return len(c.Pool)
 }
 
-func (c *Cluster) AddNode() error {
-	node := NewNode(c.ID)
-
-	// This should never happen in practice, but it's good to check
-	if _, exists := c.Pool[node.Name]; exists {
-		logger.Warn("Node already exists", "name", node.Name)
-		return fmt.Errorf("node with name %s already exists", node.Name)
-	}
-
-	c.addNode(node)
-	logger.Info("Node added successfully", "name", node.Name)
-	return nil
+// GetClusterID returns the ID of the cluster
+func (c *Cluster) GetClusterID() uuid.UUID {
+	return c.ID
 }
 
-// addNode adds a node to the internal pool by name (internal use only).
-func (c *Cluster) addNode(node *Node) {
-	c.Pool[node.Name] = node
-}
-
-func generateRandomClusterName(uniqueID uuid.UUID) string {
-	return fmt.Sprintf("cluster-%s", uniqueID.String())
+// GetClusterName returns the name of the cluster
+func (c *Cluster) GetClusterName() string {
+	return c.Name
 }
