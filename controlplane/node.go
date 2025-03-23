@@ -22,15 +22,15 @@ func NewNode(clusterID uuid.UUID, options ...NodeOptions) *Node {
 	logger.Info("Creating a new node", "clusterID", clusterID)
 	logger.Debug("Generated Node ID", "id", id)
 
-	var opts NodeOptionsß
+	var opts NodeOptions
 	if len(options) > 0 {
 		opts = options[0]
 	}
 
 	name := opts.Name
 	if name == "" {
-		logger.Info("No name provided, generating a new one")
-		name = generateName(id)
+		logger.Info("No node name provided, generating a new one")
+		name = generateRandomNodeName(id)
 		logger.Info("Generated name", "name", name)
 	}
 
@@ -41,6 +41,6 @@ func NewNode(clusterID uuid.UUID, options ...NodeOptions) *Node {
 	}
 }
 
-func generateName(uniqueID uuid.UUID) string {
+func generateRandomNodeName(uniqueID uuid.UUID) string {
 	return fmt.Sprintf("node-%s", uniqueID.String())
 }

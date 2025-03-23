@@ -14,11 +14,13 @@ var (
 
 // Cluster is a collection of nodes
 type Cluster struct {
+	Name string
 	ID   uuid.UUID
 	Pool map[string]*Node
 }
 
 type ClusterOptions struct {
+	Name string
 	Size int
 }
 
@@ -28,12 +30,12 @@ const DefaultClusterSize = 3
 // NewCluster creates a new cluster
 func NewCluster(options ...ClusterOptions) (*Cluster, error) {
 
-	clusterID := uuid.New()
+	id := uuid.New()
 
-	logger.Info("Creating a new cluster", "clusterID", clusterID)
+	logger.Info("Creating a new cluster", "clusterID", id)
 	cluster := &Cluster{
 		Pool: make(map[string]*Node),
-		ID:   clusterID,
+		ID:   id,
 	}
 
 	var opts ClusterOptions
@@ -47,14 +49,20 @@ func NewCluster(options ...ClusterOptions) (*Cluster, error) {
 		clusterSize = DefaultClusterSize
 	}
 
-	for i := 0; i < clusterSize; i++ {
+	name := opts.Name
+	if name == "" {
+		logger.Info("No cluster name provided, generating a new one")
+		name = generateRandomClusterName(id)
+	}
+
+	cluster.Name = name
+
+	for range clusterSize {
 		//Create node and add node
 		if err := cluster.AddNode(); err != nil {
 			logger.Error("Failed to add node", "error", err)
 			return nil, err
 		}
-
-		logger.Debug("Successfully added node to cluster", "nodeCount", i+1)
 	}
 
 	return cluster, nil
@@ -67,12 +75,6 @@ func (c *Cluster) GetClusterSize() int {
 
 func (c *Cluster) AddNode() error {
 	node := NewNode(c.ID)
-
-	//This should never happen in practice, but it's good to check
-	if node == nil {
-		logger.Error("Failed to create node")
-		return fmt.Errorf("failed to create node")
-	}
 
 	// This should never happen in practice, but it's good to check
 	if _, exists := c.Pool[node.Name]; exists {
@@ -88,4 +90,8 @@ func (c *Cluster) AddNode() error {
 // addNode adds a node to the internal pool by name (internal use only).
 func (c *Cluster) addNode(node *Node) {
 	c.Pool[node.Name] = node
+}
+
+func generateRandomClusterName(uniqueID uuid.UUID) string {
+	return fmt.Sprintf("cluster-%s", uniqueID.String())
 }
