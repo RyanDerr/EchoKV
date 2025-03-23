@@ -1,6 +1,6 @@
-# Key Value Store
+# EchoKV
 
-Basic KV store in GO
+EchoKV is an in-memory distributed key-value store.
 
 ## Quick Startup
 
