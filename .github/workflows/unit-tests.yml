@@ -1,4 +1,4 @@
-name: Test
+name: Run Unit Tests and Scans
 
 on: 
   push:
@@ -13,21 +13,29 @@ jobs:
   test:
     name: Test, Lint, and Security Scan
     runs-on: ubuntu-latest
-    env:
-      GO_VERSION: '>=1.23.0'
     steps: 
-      - name: Checkout repository
+      - name: Checkout Repository
+        id: checkout
         uses: actions/checkout@v4
+
+      - name: Pull Go Version From .go-version File
+        id: fetch-go-version
+        run: |
+          echo "GO_VERSION=$(cat .go-version)" >> $GITHUB_ENV
+          echo "GOTOOLCHAIN=go$(cat .go-version)" >> $GITHUB_ENV
 
       - name: Run Go Unit Tests
         uses: ./.github/workflows/actions/go-test
+        id: go-unit-tests
         with:
           go-version: ${{ env.GO_VERSION }}
       
       - name: Go Lint
+        id: golint
         uses: golangci/golangci-lint-action@v6.5.1 
       
       - name: Go Security Scans
         uses: securego/gosec@v2.22.2
+        id: gosec
         with: 
           args: -exclude-generated ./...
