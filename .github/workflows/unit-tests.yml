@@ -35,7 +35,7 @@ jobs:
         uses: golangci/golangci-lint-action@v7.0.0 
       
       - name: Go Security Scans
-        uses: securego/gosec@v2.22.2
+        uses: securego/gosec@v2.22.3
         id: gosec
         with: 
           args: -exclude-generated ./...
