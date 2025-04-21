@@ -6,7 +6,7 @@ import "google/api/annotations.proto";
 
 option go_package = "github.com/RyanDerr/EchoKV";
 
-service EchoKV {
+service KeyValue {
     rpc Set(SetRequest) returns (SetResponse) {
         option (google.api.http) = {
             post: "/v1/cache/set"
