@@ -6,7 +6,7 @@
   },
   "tags": [
     {
-      "name": "EchoKV"
+      "name": "KeyValue"
     }
   ],
   "consumes": [
@@ -18,7 +18,7 @@
   "paths": {
     "/v1/cache/delete/{key}": {
       "delete": {
-        "operationId": "EchoKV_Delete",
+        "operationId": "KeyValue_Delete",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -42,13 +42,13 @@
           }
         ],
         "tags": [
-          "EchoKV"
+          "KeyValue"
         ]
       }
     },
     "/v1/cache/get/{key}": {
       "get": {
-        "operationId": "EchoKV_Get",
+        "operationId": "KeyValue_Get",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -72,13 +72,13 @@
           }
         ],
         "tags": [
-          "EchoKV"
+          "KeyValue"
         ]
       }
     },
     "/v1/cache/set": {
       "post": {
-        "operationId": "EchoKV_Set",
+        "operationId": "KeyValue_Set",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -104,7 +104,7 @@
           }
         ],
         "tags": [
-          "EchoKV"
+          "KeyValue"
         ]
       }
     }
