@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"time"
 
-	service "github.com/RyanDerr/EchoKV/pkg/service/kv-api"
+	service "github.com/RyanDerr/EchoKV/pkg/service/api"
 	pb "github.com/RyanDerr/EchoKV/proto-public/go"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
