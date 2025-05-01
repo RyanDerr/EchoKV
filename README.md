@@ -13,7 +13,7 @@ EchoKV is an in-memory distributed key-value store.
 ## Dependencies
 
 - [Buf](https://buf.build/docs/cli/installation/#__tabbed_1_1) - Used tool for go code generations for protobufs relating to `.proto` files for gRPC calls.
-
+- [grpcui](https://github.com/fullstorydev/grpcui) - Tool used to visualize and test local grpc calls via an interactive web UI.
 ## Testing gRPC
 
 To directly test against `gRPC` API call's we can use a tool called [grpcui](https://github.com/fullstorydev/grpcui?tab=readme-ov-file#installation).
