@@ -20,10 +20,11 @@ func validateSetRequest(req *pb.SetRequest) error {
 func (s *Service) Set(ctx context.Context, req *pb.SetRequest) (*pb.SetResponse, error) {
 	err := validateSetRequest(req)
 	if err != nil {
+		s.logger.Error("validation error", "error", err)
 		return nil, status.Errorf(codes.InvalidArgument, "validation error: %s", err.Error())
 	}
 
-	resp := setcmd.Set(s.cache, req.GetKey(), req.GetValue())
-
+	resp := setcmd.Set(s.store, req.GetKey(), req.GetValue())
+	s.logger.Info("key set", "key", req.GetKey(), "value", resp)
 	return &pb.SetResponse{Key: req.GetKey(), Value: resp}, nil
 }
