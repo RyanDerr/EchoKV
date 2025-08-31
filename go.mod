@@ -5,7 +5,7 @@ go 1.24.1
 require (
 	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.2
-	github.com/stretchr/testify v1.10.0
+	github.com/stretchr/testify v1.11.1
 	google.golang.org/genproto/googleapis/api v0.0.0-20250818200422-3122310a409c
 	google.golang.org/grpc v1.75.0
 	google.golang.org/protobuf v1.36.7
