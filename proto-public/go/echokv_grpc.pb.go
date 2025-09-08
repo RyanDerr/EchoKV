@@ -19,177 +19,177 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	EchoKV_Set_FullMethodName    = "/RyanDerr.EchoKV.EchoKV/Set"
-	EchoKV_Get_FullMethodName    = "/RyanDerr.EchoKV.EchoKV/Get"
-	EchoKV_Delete_FullMethodName = "/RyanDerr.EchoKV.EchoKV/Delete"
+	KeyValue_Set_FullMethodName    = "/RyanDerr.EchoKV.KeyValue/Set"
+	KeyValue_Get_FullMethodName    = "/RyanDerr.EchoKV.KeyValue/Get"
+	KeyValue_Delete_FullMethodName = "/RyanDerr.EchoKV.KeyValue/Delete"
 )
 
-// EchoKVClient is the client API for EchoKV service.
+// KeyValueClient is the client API for KeyValue service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type EchoKVClient interface {
+type KeyValueClient interface {
 	Set(ctx context.Context, in *SetRequest, opts ...grpc.CallOption) (*SetResponse, error)
 	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error)
 	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
 }
 
-type echoKVClient struct {
+type keyValueClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewEchoKVClient(cc grpc.ClientConnInterface) EchoKVClient {
-	return &echoKVClient{cc}
+func NewKeyValueClient(cc grpc.ClientConnInterface) KeyValueClient {
+	return &keyValueClient{cc}
 }
 
-func (c *echoKVClient) Set(ctx context.Context, in *SetRequest, opts ...grpc.CallOption) (*SetResponse, error) {
+func (c *keyValueClient) Set(ctx context.Context, in *SetRequest, opts ...grpc.CallOption) (*SetResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SetResponse)
-	err := c.cc.Invoke(ctx, EchoKV_Set_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, KeyValue_Set_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *echoKVClient) Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error) {
+func (c *keyValueClient) Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetResponse)
-	err := c.cc.Invoke(ctx, EchoKV_Get_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, KeyValue_Get_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *echoKVClient) Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error) {
+func (c *keyValueClient) Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteResponse)
-	err := c.cc.Invoke(ctx, EchoKV_Delete_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, KeyValue_Delete_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// EchoKVServer is the server API for EchoKV service.
-// All implementations must embed UnimplementedEchoKVServer
+// KeyValueServer is the server API for KeyValue service.
+// All implementations must embed UnimplementedKeyValueServer
 // for forward compatibility.
-type EchoKVServer interface {
+type KeyValueServer interface {
 	Set(context.Context, *SetRequest) (*SetResponse, error)
 	Get(context.Context, *GetRequest) (*GetResponse, error)
 	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)
-	mustEmbedUnimplementedEchoKVServer()
+	mustEmbedUnimplementedKeyValueServer()
 }
 
-// UnimplementedEchoKVServer must be embedded to have
+// UnimplementedKeyValueServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedEchoKVServer struct{}
+type UnimplementedKeyValueServer struct{}
 
-func (UnimplementedEchoKVServer) Set(context.Context, *SetRequest) (*SetResponse, error) {
+func (UnimplementedKeyValueServer) Set(context.Context, *SetRequest) (*SetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Set not implemented")
 }
-func (UnimplementedEchoKVServer) Get(context.Context, *GetRequest) (*GetResponse, error) {
+func (UnimplementedKeyValueServer) Get(context.Context, *GetRequest) (*GetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedEchoKVServer) Delete(context.Context, *DeleteRequest) (*DeleteResponse, error) {
+func (UnimplementedKeyValueServer) Delete(context.Context, *DeleteRequest) (*DeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
-func (UnimplementedEchoKVServer) mustEmbedUnimplementedEchoKVServer() {}
-func (UnimplementedEchoKVServer) testEmbeddedByValue()                {}
+func (UnimplementedKeyValueServer) mustEmbedUnimplementedKeyValueServer() {}
+func (UnimplementedKeyValueServer) testEmbeddedByValue()                  {}
 
-// UnsafeEchoKVServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to EchoKVServer will
+// UnsafeKeyValueServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to KeyValueServer will
 // result in compilation errors.
-type UnsafeEchoKVServer interface {
-	mustEmbedUnimplementedEchoKVServer()
+type UnsafeKeyValueServer interface {
+	mustEmbedUnimplementedKeyValueServer()
 }
 
-func RegisterEchoKVServer(s grpc.ServiceRegistrar, srv EchoKVServer) {
-	// If the following call pancis, it indicates UnimplementedEchoKVServer was
+func RegisterKeyValueServer(s grpc.ServiceRegistrar, srv KeyValueServer) {
+	// If the following call pancis, it indicates UnimplementedKeyValueServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&EchoKV_ServiceDesc, srv)
+	s.RegisterService(&KeyValue_ServiceDesc, srv)
 }
 
-func _EchoKV_Set_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _KeyValue_Set_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SetRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EchoKVServer).Set(ctx, in)
+		return srv.(KeyValueServer).Set(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: EchoKV_Set_FullMethodName,
+		FullMethod: KeyValue_Set_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EchoKVServer).Set(ctx, req.(*SetRequest))
+		return srv.(KeyValueServer).Set(ctx, req.(*SetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _EchoKV_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _KeyValue_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EchoKVServer).Get(ctx, in)
+		return srv.(KeyValueServer).Get(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: EchoKV_Get_FullMethodName,
+		FullMethod: KeyValue_Get_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EchoKVServer).Get(ctx, req.(*GetRequest))
+		return srv.(KeyValueServer).Get(ctx, req.(*GetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _EchoKV_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _KeyValue_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EchoKVServer).Delete(ctx, in)
+		return srv.(KeyValueServer).Delete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: EchoKV_Delete_FullMethodName,
+		FullMethod: KeyValue_Delete_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EchoKVServer).Delete(ctx, req.(*DeleteRequest))
+		return srv.(KeyValueServer).Delete(ctx, req.(*DeleteRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// EchoKV_ServiceDesc is the grpc.ServiceDesc for EchoKV service.
+// KeyValue_ServiceDesc is the grpc.ServiceDesc for KeyValue service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var EchoKV_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "RyanDerr.EchoKV.EchoKV",
-	HandlerType: (*EchoKVServer)(nil),
+var KeyValue_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "RyanDerr.EchoKV.KeyValue",
+	HandlerType: (*KeyValueServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Set",
-			Handler:    _EchoKV_Set_Handler,
+			Handler:    _KeyValue_Set_Handler,
 		},
 		{
 			MethodName: "Get",
-			Handler:    _EchoKV_Get_Handler,
+			Handler:    _KeyValue_Get_Handler,
 		},
 		{
 			MethodName: "Delete",
-			Handler:    _EchoKV_Delete_Handler,
+			Handler:    _KeyValue_Delete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
