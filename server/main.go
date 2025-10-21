@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"time"
 
-	service "github.com/RyanDerr/EchoKV/pkg/service/kv-api"
+	service "github.com/RyanDerr/EchoKV/pkg/service/api"
 	pb "github.com/RyanDerr/EchoKV/proto-public/go"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
@@ -30,7 +30,7 @@ func main() {
 
 		s := grpc.NewServer()
 		svc := service.NewService()
-		pb.RegisterEchoKVServer(s, svc)
+		pb.RegisterKeyValueServer(s, svc)
 
 		if err := s.Serve(lis); err != nil {
 			log.Fatalf("Failed to serve: %v\n", err)
@@ -40,7 +40,7 @@ func main() {
 	// Create a new gRPC Gateway mux for the HTTP server on main goroutine
 	mux := runtime.NewServeMux()
 	opts := []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())}
-	err := pb.RegisterEchoKVHandlerFromEndpoint(context.Background(), mux, grpcAddr, opts)
+	err := pb.RegisterKeyValueHandlerFromEndpoint(context.Background(), mux, grpcAddr, opts)
 	if err != nil {
 		log.Fatalf("Failed to start HTTP gateway: %v", err)
 	}
