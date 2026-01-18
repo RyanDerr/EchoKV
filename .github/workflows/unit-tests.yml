@@ -32,7 +32,7 @@ jobs:
       
       - name: Go Lint
         id: golint
-        uses: golangci/golangci-lint-action@v9.1.0 
+        uses: golangci/golangci-lint-action@v9.2.0 
       
       - name: Go Security Scans
         uses: securego/gosec@v2.22.10
